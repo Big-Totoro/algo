@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Numbers {
 
     /**
-     * Find all combinations that match to the a^3 + b^3 = c^3 + d^3
+     * Find all combinations a, b, c, d that match to the a^3 + b^3 = c^3 + d^3
      *
      * Brute force algorithms through all values O(n^4)
      */
@@ -23,19 +23,19 @@ public class Numbers {
          */
         int operations = 0;
 
-        for (int a = 0; a < A; ++a) {
+        for (int a = 1; a <= A; ++a) {
 
-            for (int b = 0; b < B; ++b) {
+            for (int b = 1; b <= B; ++b) {
 
-                for (int c = 0; c < C; ++c) {
+                for (int c = 1; c <= C; ++c) {
 
-                    for (int d = 0; d < D; ++d) {
+                    for (int d = 1; d <= D; ++d) {
 
                         ++operations;
 
                         if ((Math.pow(a, 3) + Math.pow(b, 3)) == (Math.pow(c, 3) + Math.pow(d, 3))) {
 
-                            System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d, %d, %d, %d", a, b, c, d));
+                            System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d %d %d %d", a, b, c, d));
 
                             ++combinations;
 
@@ -51,7 +51,7 @@ public class Numbers {
     }
 
     /**
-     * Find all combinations that match to the a^3 + b^3 = c^3 + d^3
+     * Find all combinations a, b, c, d that match to the a^3 + b^3 = c^3 + d^3
      *
      * Brute force algorithms through all values O(n^3) and we calculate d = Pow(a^3 + b^3 - c^3, 1/3)
      */
@@ -68,18 +68,18 @@ public class Numbers {
          */
         int operations = 0;
 
-        for (int a = 0; a < A; ++a) {
+        for (int a = 1; a <= A; ++a) {
 
-            for (int b = 0; b < B; ++b) {
+            for (int b = 1; b <= B; ++b) {
 
-                for (int c = 0; c < C; ++c) {
+                for (int c = 1; c <= C; ++c) {
 
                     ++operations;
 
                     int d = (int) Math.pow(Math.pow(a, 3) + Math.pow(b, 3) - Math.pow(c, 3), 1.0f / 3.0f);
-                    if ((Math.pow(a, 3) + Math.pow(b, 3)) == (Math.pow(c, 3) + Math.pow(d, 3))) {
+                    if (((Math.pow(a, 3) + Math.pow(b, 3)) == (Math.pow(c, 3) + Math.pow(d, 3))) && (d <= 100)){
 
-                        System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d, %d, %d, %d", a, b, c, d));
+                        System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d %d %d %d", a, b, c, d));
 
                         ++combinations;
                     }
@@ -92,9 +92,9 @@ public class Numbers {
     }
 
     /**
-     * Find all combinations that match to the a^3 + b^3 = c^3 + d^3
+     * Find all combinations a, b, c, d that match to the a^3 + b^3 = c^3 + d^3
      *
-     * Brute force algorithms through all values O(n^3) and we calculate d = Pow(a^3 + b^3 - c^3, 1/3)
+     * Put c^3 + d^3 values to HashMap and then compare
      */
     public static void a3b3_eq_c3d3_optimization2() {
 
@@ -111,9 +111,9 @@ public class Numbers {
 
         HashMap map = new HashMap(C * D);
 
-        for (int c = 0; c < C; ++c) {
+        for (int c = 1; c <= C; ++c) {
 
-            for (int d = 0; d < D; ++d) {
+            for (int d = 1; d <= D; ++d) {
 
                 int sum = (int) (Math.pow(c, 3) + Math.pow(d, 3));
                 ArrayList valuesCD = (ArrayList) map.get(Integer.valueOf(sum));
@@ -124,25 +124,29 @@ public class Numbers {
                     map.put(Integer.valueOf(sum), valuesCD);
                 }
 
-                valuesCD.add(c);
-                valuesCD.add(d);
+                ++operations;
+
+                valuesCD.add(new Pair<Integer>(c, d));
             }
         }
 
-        for (int a = 0; a < A; ++a) {
+        for (int a = 1; a <= A; ++a) {
 
-            for (int b = 0; b < B; ++b) {
-
-                ++operations;
+            for (int b = 1; b <= B; ++b) {
 
                 ArrayList valuesCD = (ArrayList)map.get(Integer.valueOf( (int)(Math.pow(a, 3) + Math.pow(b, 3)) ));
 
                 if (valuesCD != null) {
 
-                    for (int i = 0; i <= valuesCD.size() / 2; i += 2) {
+                    for (int i = 0; i < valuesCD.size(); ++i) {
 
-                        System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d, %d, %d, %d", a, b, valuesCD.get(i), valuesCD.get(i + 1)));
+                        System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d %d %d %d",
+                                a,
+                                b,
+                                ((Pair)valuesCD.get(i)).getLeft(),
+                                ((Pair)valuesCD.get(i)).getRight()));
 
+                        ++operations;
                         ++combinations;
                     }
                 }
