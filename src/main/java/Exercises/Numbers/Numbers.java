@@ -157,10 +157,74 @@ public class Numbers {
         System.out.println(String.format("A number of operations to find all combinations: %d", operations));
     }
 
+    /**
+     * Find all combinations a, b, c, d that match to the a^3 + b^3 = c^3 + d^3
+     *
+     * Put c^3 + d^3 values to HashMap and then go through the keys and compare combinations on values
+     */
+    public static void a3b3_eq_c3d3_optimization3() {
+
+        int A = 100, B = 100, C = 100, D = 100;
+        /**
+         * A number of combinations
+         */
+        int combinations = 0;
+
+        /**
+         * A number of operations;
+         */
+        int operations = 0;
+
+        HashMap<Integer, ArrayList>map = new HashMap(C * D);
+
+        for (int c = 1; c <= C; ++c) {
+
+            for (int d = 1; d <= D; ++d) {
+
+                int sum = (int) (Math.pow(c, 3) + Math.pow(d, 3));
+                ArrayList valuesCD = (ArrayList) map.get(Integer.valueOf(sum));
+
+                if (valuesCD == null) {
+
+                    valuesCD = new ArrayList();
+                    map.put(Integer.valueOf(sum), valuesCD);
+                }
+
+                ++operations;
+
+                valuesCD.add(new Pair<Integer>(c, d));
+            }
+        }
+
+        for (Integer key : map.keySet()) {
+
+            ArrayList<Pair> pairs = map.get(key);
+
+            for (int i = 0; i < pairs.size(); ++i) {
+
+                for (int j = 0; j < pairs.size(); ++j) {
+
+                    System.out.println(String.format("a^3 + b^3 = c^3 + d^3 -> %d %d %d %d",
+                            pairs.get(i).getLeft(),
+                            pairs.get(i).getRight(),
+                            pairs.get(j).getLeft(),
+                            pairs.get(j).getRight()));
+
+                    ++operations;
+                    ++combinations;
+                }
+            }
+        }
+
+        System.out.println(String.format("A number of iterations to find all combinations: %d", combinations));
+        System.out.println(String.format("A number of operations to find all combinations: %d", operations));
+    }
+
     public static void main(String[] args) {
 
 //        a3b3_eq_c3d3_brute_force();
 //        a3b3_eq_c3d3_optimization1();
-        a3b3_eq_c3d3_optimization2();
+//        a3b3_eq_c3d3_optimization2();
+        a3b3_eq_c3d3_optimization3();
     }
 }
