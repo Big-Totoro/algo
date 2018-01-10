@@ -177,12 +177,15 @@ public class Numbers {
 
         HashMap<Integer, ArrayList>map = new HashMap(C * D);
 
+        /**
+         * Calculate the sum for the C and D combinations
+         */
         for (int c = 1; c <= C; ++c) {
 
             for (int d = 1; d <= D; ++d) {
 
                 int sum = (int) (Math.pow(c, 3) + Math.pow(d, 3));
-                ArrayList valuesCD = (ArrayList) map.get(Integer.valueOf(sum));
+                ArrayList valuesCD = map.get(Integer.valueOf(sum));
 
                 if (valuesCD == null) {
 
@@ -192,7 +195,7 @@ public class Numbers {
 
                 ++operations;
 
-                valuesCD.add(new Pair<Integer>(c, d));
+                valuesCD.add(new Pair(c, d));
             }
         }
 
@@ -220,11 +223,58 @@ public class Numbers {
         System.out.println(String.format("A number of operations to find all combinations: %d", operations));
     }
 
+    /**
+     * Rotates square matrix
+     * @param matrix to rotate
+     * @return Rotated matrix
+     */
+    public static int[][] rotateMatrix(int[][] matrix) {
+
+        assert (matrix.length > 0);
+        assert (matrix.length == matrix[0].length);
+
+        for (int k = 0; k < matrix.length / 2; ++k) {
+
+            int top = k;
+            int left = k;
+            int size = matrix.length - (matrix.length * k / 2) - 1;
+
+            for (int i = 0; i < size; ++i) {
+
+                int temp = matrix[top][size - i];
+                matrix[top][size - i] = matrix[i + k][left + k];
+                matrix[i + k][left + k] = matrix[size + k][i + k];
+                matrix[size + k][i + k] = matrix[size - i][size];
+                matrix[size - i][size] = temp;
+            }
+        }
+
+        return matrix;
+    }
+
     public static void main(String[] args) {
 
 //        a3b3_eq_c3d3_brute_force();
 //        a3b3_eq_c3d3_optimization1();
 //        a3b3_eq_c3d3_optimization2();
         a3b3_eq_c3d3_optimization3();
+
+        int[][] matrix = {
+                {11, 12, 13, 14},
+                {21, 22, 23, 24},
+                {31, 32, 33, 34},
+                {41, 42, 43, 44}};
+
+        matrix = rotateMatrix(matrix);
+
+        for (int i = 0; i < matrix.length; ++i) {
+
+            for (int j = 0; j < matrix.length; ++j) {
+
+                System.out.print(String.format("%d ", matrix[i][j]));
+            }
+
+            System.out.println("");
+        }
     }
 }

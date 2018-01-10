@@ -1,8 +1,10 @@
 package Exercises.Strings;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class Permutations {
 
@@ -136,6 +138,48 @@ public class Permutations {
         return true;
     }
 
+    /**
+     * Verifies is the input string can be permutated to palindrome
+     * @param input string to verify
+     * @return true in case of the input string is palindrome
+     */
+    public static boolean isPermutationPalindrome(String input) {
+
+        assert (!input.isEmpty());
+
+        char[] a = input.toCharArray();
+        Character[] array = IntStream.range(0, a.length).mapToObj(n -> a[n]).toArray(Character[]::new);
+        HashMap<Character, Integer> symbolsCounter = new HashMap<>(50);
+
+        for (Character ch : array) {
+
+            Integer counter = symbolsCounter.get(ch);
+            if (counter == null) {
+
+                symbolsCounter.put(ch, Integer.valueOf(1));
+
+            } else {
+
+                symbolsCounter.put(ch, new Integer(counter.intValue() + 1));
+            }
+        }
+
+        /**
+         * A odd values counter. We should have only one odd value.
+         */
+        int odds = 0;
+
+        for (Integer value : symbolsCounter.values()) {
+
+            if (value.intValue() % 2 > 0) {
+
+                ++odds;
+            }
+        }
+
+        return odds <= 1;
+    }
+
     public static void main(String args[]) {
 
         findAllPermutations("1234");
@@ -148,5 +192,9 @@ public class Permutations {
 
         boolean permutation2 = isPermutation2(s1, s2);
         System.out.println(String.format("The '%s' string is permutation of the string '%s' - %s", s1, s2, Boolean.valueOf(permutation2)));
+
+        String s3 = "dogod";
+        boolean permutation3 = isPermutationPalindrome(s3);
+        System.out.println(String.format("The '%s' string is permutation of the string '%s'", s3, Boolean.valueOf(permutation3)));
     }
 }
