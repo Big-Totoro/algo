@@ -109,24 +109,24 @@ public class Numbers {
          */
         int operations = 0;
 
-        HashMap map = new HashMap(C * D);
+        HashMap<Integer, ArrayList<Pair<Integer>>> map = new HashMap<>(C * D);
 
         for (int c = 1; c <= C; ++c) {
 
             for (int d = 1; d <= D; ++d) {
 
                 int sum = (int) (Math.pow(c, 3) + Math.pow(d, 3));
-                ArrayList valuesCD = (ArrayList) map.get(Integer.valueOf(sum));
+                ArrayList<Pair<Integer>> valuesCD = map.get(Integer.valueOf(sum));
 
                 if (valuesCD == null) {
 
-                    valuesCD = new ArrayList();
+                    valuesCD = new ArrayList<>();
                     map.put(Integer.valueOf(sum), valuesCD);
                 }
 
                 ++operations;
 
-                valuesCD.add(new Pair<Integer>(c, d));
+                valuesCD.add(new Pair<>(c, d));
             }
         }
 
@@ -134,7 +134,7 @@ public class Numbers {
 
             for (int b = 1; b <= B; ++b) {
 
-                ArrayList valuesCD = (ArrayList)map.get(Integer.valueOf( (int)(Math.pow(a, 3) + Math.pow(b, 3)) ));
+                ArrayList valuesCD = map.get(Integer.valueOf( (int)(Math.pow(a, 3) + Math.pow(b, 3)) ));
 
                 if (valuesCD != null) {
 
@@ -175,7 +175,7 @@ public class Numbers {
          */
         int operations = 0;
 
-        HashMap<Integer, ArrayList>map = new HashMap(C * D);
+        HashMap<Integer, ArrayList<Pair<Integer>>>map = new HashMap<>(C * D);
 
         /**
          * Calculate the sum for the C and D combinations
@@ -185,23 +185,23 @@ public class Numbers {
             for (int d = 1; d <= D; ++d) {
 
                 int sum = (int) (Math.pow(c, 3) + Math.pow(d, 3));
-                ArrayList valuesCD = map.get(Integer.valueOf(sum));
+                ArrayList<Pair<Integer>> valuesCD = map.get(Integer.valueOf(sum));
 
                 if (valuesCD == null) {
 
-                    valuesCD = new ArrayList();
+                    valuesCD = new ArrayList<>();
                     map.put(Integer.valueOf(sum), valuesCD);
                 }
 
                 ++operations;
 
-                valuesCD.add(new Pair(c, d));
+                valuesCD.add(new Pair<>(c, d));
             }
         }
 
         for (Integer key : map.keySet()) {
 
-            ArrayList<Pair> pairs = map.get(key);
+            ArrayList<Pair<Integer>> pairs = map.get(key);
 
             for (int i = 0; i < pairs.size(); ++i) {
 

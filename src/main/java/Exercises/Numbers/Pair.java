@@ -2,8 +2,8 @@ package Exercises.Numbers;
 
 public class Pair<T> {
 
-    private T left;
-    private T right;
+    private final T left;
+    private final T right;
 
     public Pair(T left, T right) {
 

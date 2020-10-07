@@ -27,11 +27,11 @@ public class InsertingSort<T extends Comparable<T>> implements SortingAlgo<T> {
 
     public static void main(String[] args) {
 
-        SortingAlgo sortingAlgo = new InsertingSort();
+        SortingAlgo<Integer> sortingAlgo = new InsertingSort<>();
         Integer[] unsorted = {5, 2, 4, 6, 1, 3, 5, 1};
 
         sortingAlgo.sort(unsorted);
 
-        System.out.println(String.format("The sortered array: %s", Arrays.toString(unsorted)));
+        System.out.println(String.format("The sorted array: %s", Arrays.toString(unsorted)));
     }
 }

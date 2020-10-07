@@ -139,7 +139,7 @@ public class Permutations {
     }
 
     /**
-     * Verifies is the input string can be permutated to palindrome
+     * Verifies is the input string can be permuted to palindrome
      * @param input string to verify
      * @return true in case of the input string is palindrome
      */
@@ -160,7 +160,7 @@ public class Permutations {
 
             } else {
 
-                symbolsCounter.put(ch, new Integer(counter.intValue() + 1));
+                symbolsCounter.put(ch, Integer.valueOf(counter.intValue() + 1));
             }
         }
 
@@ -180,7 +180,7 @@ public class Permutations {
         return odds <= 1;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         findAllPermutations("1234");
 

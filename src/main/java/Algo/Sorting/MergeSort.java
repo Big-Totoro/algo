@@ -1,6 +1,5 @@
 package Algo.Sorting;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -13,7 +12,7 @@ public class MergeSort <T extends Comparable<T>> implements SortingAlgo<T> {
             return;
         }
 
-        Integer mid = unsorted.length / 2;
+        int mid = unsorted.length / 2;
         T[] left = Arrays.copyOfRange(unsorted, 0, mid);
         T[] right = Arrays.copyOfRange(unsorted, mid, unsorted.length);
         sort(left);
