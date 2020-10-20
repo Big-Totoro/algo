@@ -33,6 +33,7 @@ public class ClosestPairTest {
         ClosestPair closestPair = new ClosestPair();
         ClosestPair.Point result[] = closestPair.findClosestPair2(
                 new ClosestPair.Point[] {
+                        new ClosestPair.Point(2, 1),
                         new ClosestPair.Point(2, 5),
                         new ClosestPair.Point(6, 2),
                         new ClosestPair.Point(3, 3),
