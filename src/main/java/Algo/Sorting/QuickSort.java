@@ -2,13 +2,13 @@ package Algo.Sorting;
 
 import java.util.Random;
 
-public class QuickSort {
-    public void sort(int[] array) {
+public class QuickSort<T extends Comparable<T>> implements SortingAlgo<T> {
+    public void sort(T[] array) {
         sort(array, 0, array.length - 1);
     }
 
-    private void sort(int[] array, int l, int r) {
-        if (r - l <= 1) {
+    private void sort(T[] array, int l, int r) {
+        if (r - l < 1) {
             return;
         }
 
@@ -18,18 +18,18 @@ public class QuickSort {
         sort(array, j + 1, r);
     }
 
-    private int choosePivotPoint(int[] array, int l, int r) {
+    private int choosePivotPoint(T[] array, int l, int r) {
         return l + new Random().nextInt(r - l);
     }
 
-    private int partition(int[] array, int l, int r, int pivot) {
+    private int partition(T[] array, int l, int r, int pivot) {
         swap(array, l, pivot);
 
         int i = l + 1;
-        int p = array[l];
+        T p = array[l];
 
         for (int j = l + 1; j <= r; ++j) {
-            if (array[j] < p) {
+            if (array[j].compareTo(p) < 0) {
                 swap(array, i, j);
                 i++;
             }
@@ -39,8 +39,8 @@ public class QuickSort {
         return i - 1;
     }
 
-    private void swap(int[] array, int l, int r) {
-        int temp = array[l];
+    private void swap(T[] array, int l, int r) {
+        T temp = array[l];
         array[l] = array[r];
         array[r] = temp;
     }
