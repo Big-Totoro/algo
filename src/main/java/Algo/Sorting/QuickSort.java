@@ -1,9 +1,19 @@
 package Algo.Sorting;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class QuickSort<T extends Comparable<T>> implements SortingAlgo<T> {
+
+    private Comparator<T> comparator;
+
     public void sort(T[] array) {
+        this.comparator = Comparator.naturalOrder();
+        sort(array, 0, array.length - 1);
+    }
+
+    public void sort(T[] array, Comparator<T> comparator) {
+        this.comparator = comparator;
         sort(array, 0, array.length - 1);
     }
 
@@ -29,7 +39,7 @@ public class QuickSort<T extends Comparable<T>> implements SortingAlgo<T> {
         T p = array[l];
 
         for (int j = l + 1; j <= r; ++j) {
-            if (array[j].compareTo(p) < 0) {
+            if (comparator.compare(array[j], p) < 0) {
                 swap(array, i, j);
                 i++;
             }
