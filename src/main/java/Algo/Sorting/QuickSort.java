@@ -21,13 +21,13 @@ public class QuickSort<T extends Comparable<T>> implements SortingAlgo<T> {
             return;
         }
 
-        int i = choosePivotPoint(array, l, r);
+        int i = choosePivot(array, l, r);
         int j = partition(array, l, r, i);
         sort(array, l, j - 1);
         sort(array, j + 1, r);
     }
 
-    private int choosePivotPoint(T[] array, int l, int r) {
+    private int choosePivot(T[] array, int l, int r) {
         return l + new Random().nextInt(r - l);
     }
 
