@@ -5,10 +5,9 @@ import java.util.Random;
 
 public class QuickSort<T extends Comparable<T>> implements SortingAlgo<T> {
 
-    private Comparator<T> comparator;
+    private Comparator<T> comparator = Comparator.naturalOrder();
 
     public void sort(T[] array) {
-        this.comparator = Comparator.naturalOrder();
         sort(array, 0, array.length - 1);
     }
 

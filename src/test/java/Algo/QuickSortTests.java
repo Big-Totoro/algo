@@ -23,4 +23,12 @@ public class QuickSortTests {
         quickSort.sort(array, Comparator.reverseOrder());
         assertThat(array).isEqualTo(new Integer[] {8, 7, 6, 5, 4, 3, 2, 1});
     }
+
+    @Test
+    public void test13() {
+        Integer[] array = {2, 3, 2, 1};
+        QuickSort<Integer> quickSort = new QuickSort<>();
+        quickSort.sort(array);
+        assertThat(array).isEqualTo(new Integer[] {1, 2, 2, 3});
+    }
 }
