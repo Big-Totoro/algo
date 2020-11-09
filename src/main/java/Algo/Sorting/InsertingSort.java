@@ -1,8 +1,12 @@
 package Algo.Sorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Objects;
 
 public class InsertingSort<T extends Comparable<T>> implements SortingAlgo<T> {
+
+    private Comparator<T> comparator = Comparator.naturalOrder();
 
     @Override
     public void sort(T[] unsorted) {
@@ -13,7 +17,7 @@ public class InsertingSort<T extends Comparable<T>> implements SortingAlgo<T> {
 
             key = unsorted[i];
             j = i;
-            while ((j > 0) && (unsorted[j - 1].compareTo(unsorted[j]) > 0) ) {
+            while ((j > 0) && (comparator.compare(unsorted[j - 1], unsorted[j]) > 0)) {
 
                 unsorted[j] = unsorted[j - 1];
                 unsorted[j - 1] = key;
@@ -21,6 +25,13 @@ public class InsertingSort<T extends Comparable<T>> implements SortingAlgo<T> {
                 j = j - 1;
             }
         }
+    }
+
+    @Override
+    public void sort(T[] unsorted, Comparator<T> comparator) {
+        Objects.requireNonNull(comparator);
+        this.comparator = comparator;
+        sort(unsorted);
     }
 
     public static void main(String[] args) {

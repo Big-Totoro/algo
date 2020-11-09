@@ -1,9 +1,12 @@
 package Algo.Sorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class MergeSort <T extends Comparable<T>> implements SortingAlgo<T> {
+
+    private Comparator<T> comparator = Comparator.naturalOrder();
 
     @Override
     public void sort(T[] unsorted) {
@@ -18,6 +21,13 @@ public class MergeSort <T extends Comparable<T>> implements SortingAlgo<T> {
         sort(left);
         sort(right);
         merge(unsorted, left, right);
+    }
+
+    @Override
+    public void sort(T[] unsorted, Comparator<T> comparator) {
+        Objects.requireNonNull(comparator);
+        this.comparator = comparator;
+        sort(unsorted);
     }
 
     private void merge(T[] result, T[] left, T[] right) {
