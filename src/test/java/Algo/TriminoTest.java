@@ -21,8 +21,9 @@ public class TriminoTest {
         for (int i = 0; i < triminos[0].length; i++) {
             for (int j = 0; j < triminos[i].length; j++) {
                 String t = triminos[i][j];
-                System.out.println(t);
+                System.out.print(t);
             }
+            System.out.println("");
         }
     }
 }

@@ -53,30 +53,30 @@ public class Trimino {
     }
 
     private void drawL1(String[][] array, int x, int y) {
-        array[x][y] = " ";
-        array[x + 1][y] = "\u2501";
-        array[x][y - 1] = "\u2503";
-        array[x + 1][y - 1] = "\u2513";
+        array[x][y] = "\u2501";
+        array[x + 1][y] = "\u2513";
+        array[x][y + 1] = " ";
+        array[x + 1][y + 1] = "\u2503";
     }
 
     private void drawL2(String[][] array, int x, int y) {
-        array[x][y] = "\u2503";
-        array[x + 1][y] = " ";
-        array[x][y - 1] = "\u250f";
-        array[x + 1][y - 1] = "\u2501";
+        array[x][y] = "\u250f";
+        array[x + 1][y] = "\u250f";
+        array[x][y + 1] = "\u2503";
+        array[x + 1][y + 1] = " ";
     }
 
     private void drawL3(String[][] array, int x, int y) {
-        array[x][y] = "\u2501";
-        array[x + 1][y] = "\u251b";
-        array[x][y - 1] = " ";
-        array[x + 1][y - 1] = "\u2503";
+        array[x][y] = " ";
+        array[x + 1][y] = "\u2503";
+        array[x][y + 1] = "\u2501";
+        array[x + 1][y + 1] = "\u251b";
     }
 
     private void drawL4(String[][] array, int x, int y) {
-        array[x][y] = "\u2507";
-        array[x + 1][y] = "\u2501";
-        array[x][y - 1] = "\u2503";
-        array[x + 1][y - 1] = " ";
+        array[x][y] = "\u2503";
+        array[x + 1][y] = " ";
+        array[x][y + 1] = "\u2517";
+        array[x + 1][y + 1] = "\u2501";
     }
 }
