@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MergeSortTests {
+public class MergeSortTest {
 
     @Before
     public void setup() {

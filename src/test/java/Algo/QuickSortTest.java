@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class QuickSortTests {
+public class QuickSortTest {
     @Test
     public void test11() {
         Integer[] array = {3, 8, 2, 5, 1, 4, 7, 6};

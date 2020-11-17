@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class SelectionSortTests {
+public class SelectionSortTest {
 
     @Test
     public void test11() {
