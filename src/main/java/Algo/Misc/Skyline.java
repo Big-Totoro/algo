@@ -101,15 +101,10 @@ public class Skyline {
     }
 
     public List<Pair> computeSkyline(Building[] buildings) {
-        List<Pair> result = new ArrayList<>();
-        computeSkyline(buildings, result);
-        return result;
-    }
-
-    public List<Pair> computeSkyline(Building[] buildings, List<Pair> result) {
         if (buildings.length == 0) {
             return List.of();
         } else if (buildings.length == 1) {
+            List<Pair> result = new ArrayList<>(2);
             result.add(Pair.valueOf(buildings[0].getX1(), buildings[0].h));
             result.add(Pair.valueOf(buildings[0].getX2(), 0));
             return result;
@@ -122,12 +117,12 @@ public class Skyline {
         List<Pair> left = computeSkyline(l);
         List<Pair> right = computeSkyline(r);
 
-        merge(left, right, result);
-
-        return result;
+        return merge(left, right);
     }
 
-    private void merge(List<Pair> left, List<Pair> right, List<Pair> result) {
+    private List<Pair> merge(List<Pair> left, List<Pair> right) {
+        List<Pair> pairs = new ArrayList<>();
+
         int i = 0;
         int j = 0;
         int hLeft = 0;
@@ -153,24 +148,26 @@ public class Skyline {
 
             if (maxH != Math.max(hLeft, hRight)) {
                 maxH = Math.max(hLeft, hRight);
-                if (result.size() > 0) {
-                    if (result.get(result.size() - 1).getX() != x && result.get(result.size() - 1).getH() != maxH) {
-                        result.add(Pair.valueOf(x, maxH));
+                if (pairs.size() > 0) {
+                    if (pairs.get(pairs.size() - 1).getX() != x && pairs.get(pairs.size() - 1).getH() != maxH) {
+                        pairs.add(Pair.valueOf(x, maxH));
                     }
                 } else {
-                    result.add(Pair.valueOf(x, maxH));
+                    pairs.add(Pair.valueOf(x, maxH));
                 }
             }
         }
 
         while (i < left.size()) {
-            result.add(Pair.valueOf(left.get(i).getX(), left.get(i).getH()));
+            pairs.add(Pair.valueOf(left.get(i).getX(), left.get(i).getH()));
             i++;
         }
 
         while (j < right.size()) {
-            result.add(Pair.valueOf(right.get(j).getX(), right.get(j).getH()));
+            pairs.add(Pair.valueOf(right.get(j).getX(), right.get(j).getH()));
             j++;
         }
+
+        return pairs;
     }
 }
