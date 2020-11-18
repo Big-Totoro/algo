@@ -70,7 +70,7 @@ public class WalkInSwamp {
             };
         }
 
-        return ways.stream().filter(l -> l.size() == field[0].length).findFirst().get();
+        return ways.stream().filter(l -> l.size() == field[0].length).findFirst().orElse(List.of());
     }
 
     private boolean findWay(int[][] field, int row, int col, List<Point> points) {
