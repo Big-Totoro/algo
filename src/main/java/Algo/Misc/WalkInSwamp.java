@@ -92,7 +92,13 @@ public class WalkInSwamp {
             };
         }
 
-        return ways.stream().filter(l -> l.size() == field[0].length).findFirst().orElse(List.of());
+        /**
+         * We will return only the ways that have the points from the start to the end of the field.
+         */
+        return ways.stream()
+                .filter(l -> l.size() == field[0].length)
+                .findFirst()
+                .orElse(List.of());
     }
 
     private boolean findWay(int[][] field, int row, int col, List<Point> points) {
