@@ -1,7 +1,6 @@
 package Algo.Misc;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +11,9 @@ import java.util.Objects;
  */
 public class WalkInSwamp {
 
+    /**
+     * The class represents the points of the way as the pair of row and column.
+     */
     public static class Point {
         int x;
         int y;
@@ -54,18 +56,38 @@ public class WalkInSwamp {
     public final int SWAMP = 0;
     public final int GROUND = 1;
 
+    /**
+     * Finds the safe way in the dangerous field.
+     * @param field is the 2D array of integers with 0 and 1 values
+     * @return the list of points representing the safe way or an empty list in case the safe way was not found.
+     */
     public List<Point> findWay(int[][] field) {
+        /**
+         * Returns an empty list in case of we doesn't have the data
+         */
         if (field.length == 0 && field[0].length == 0) {
             return List.of();
         }
 
+        /**
+         * The list stores the list of way points we will found
+         */
         List<List<Point>> ways = new ArrayList<>();
         for (int row = 0; row < field.length; row++) {
+            /**
+             * Looping through the first column of the field and looking for the ground to start the way
+             */
             if (field[row][0] == GROUND) {
+                /**
+                 * The list of way points and our first starting point in it.
+                 */
                 List<Point> points = new ArrayList<>();
                 points.add(Point.valueOf(row, 0));
                 ways.add(points);
 
+                /**
+                 * Let's go
+                 */
                 findWay(field, row, 0, points);
             };
         }
@@ -74,6 +96,9 @@ public class WalkInSwamp {
     }
 
     private boolean findWay(int[][] field, int row, int col, List<Point> points) {
+        /**
+         * Checking, whether we have reached the other end of the field
+         */
         if (col == field[0].length - 1) {
             return true;
         }
@@ -82,6 +107,9 @@ public class WalkInSwamp {
         boolean down = false;
         boolean forward = false;
 
+        /**
+         * Checking, whether we can go up and forward.
+         */
         if ((row != 0) && (field[row - 1][col + 1] != SWAMP)) {
             points.add(Point.valueOf(row - 1, col + 1));
             up = findWay(field, row - 1, col + 1, points);
@@ -89,6 +117,9 @@ public class WalkInSwamp {
             up = false;
         }
 
+        /**
+         * Since we cannot go up and forward, whether we can go down and forward.
+         */
         if (!up && (row < field.length - 1) && (field[row + 1][col + 1] != SWAMP)) {
             points.add(Point.valueOf(row + 1, col + 1));
             down = findWay(field, row + 1, col + 1, points);
@@ -96,6 +127,9 @@ public class WalkInSwamp {
             down = false;
         }
 
+        /**
+         * In case of we cannot go up and down, can we go just forward? Is there a swamp going forward?
+         */
         if (!up && !down && (field[row][col + 1] != SWAMP)) {
             points.add(Point.valueOf(row, col + 1));
             forward = findWay(field, row, col + 1, points);
